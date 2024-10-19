@@ -26,12 +26,17 @@ myManageHook = composeAll
     [ className =? "pavucontrol" --> doCenterFloat
     , className =? "qemu" --> doCenterFloat
     , className =? "feh" --> doCenterFloat
+    -- For Jubin's 8085simulator
+    , stringProperty "WM_NAME" =? "Save Mnemonics" --> doCenterFloat
+    , stringProperty "WM_NAME" =? "Warning ! " --> doCenterFloat
+    --
     , stringProperty "WM_NAME" =? "Quit GIMP" --> doCenterFloat
     ]
 
 myLayoutHook =
     onWorkspace "9" simpleFloat $
     onWorkspace "8" (avoidStruts Full ||| tiled) $
+    onWorkspace "7" (avoidStruts Full ||| tiled) $
     avoidStruts $ spacingWithEdge 4 $ gaps [(U, 5), (R, 3), (D, 3), (L, 3)] $ tiled ||| Mirror tiled ||| Full
     where
         tiled = Tall nmaster delta ratio
