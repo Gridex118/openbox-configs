@@ -123,13 +123,3 @@ lspconfig.clangd.setup {
 }
 
 lspconfig.bashls.setup {}
-
-lspconfig.arduino_language_server.setup {
-    cmd = {
-        "arduino-language-server",
-        "-cli-config", "~/.arduino15/arduino-cli.yaml",
-        "-cli", "arduino-cli",
-        "-clangd", "clangd",
-        "-fqbn", "arduino:avr:uno",
-    },
-}
