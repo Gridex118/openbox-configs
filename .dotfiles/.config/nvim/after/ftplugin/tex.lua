@@ -8,13 +8,13 @@ local FSHOME = vim.fn.expand("$HOME")
 
 local texInfo = {}
 -- all tex projects are stored in the $HOME/authoring/<projectName>/ directory
-_, _, texInfo.projectName = string.find(vim.fn.expand('%:~'), "authoring/([^/]*)/")
+_, _, texInfo.projectName = string.find(vim.fn.expand('%:~'), "Authoring/([^/]*)/")
 texInfo.auxDir = FSHOME .. "/.texbuild/"
 texInfo.target = vim.fn.expand('%:.')
 if not (texInfo.projectName == nil) then
     texInfo.isProject = true
     _, _, texInfo.fileName = string.find(vim.fn.expand('%:t'), "([^.]*)")
-    texInfo.rootDir = FSHOME .. "/authoring/" .. texInfo.projectName
+    texInfo.rootDir = FSHOME .. "/Authoring/" .. texInfo.projectName
     texInfo.outDir = texInfo.rootDir .. "/pdf/"
     texInfo.pdf = texInfo.outDir .. texInfo.fileName .. ".pdf"
 else

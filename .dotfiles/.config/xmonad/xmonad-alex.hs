@@ -6,6 +6,8 @@ import XMonad.Layout.Gaps
 import XMonad.Layout.Spacing
 import XMonad.Layout.SimpleFloat
 import XMonad.Layout.PerWorkspace
+import XMonad.Layout.Tabbed
+import XMonad.Layout.Master
 
 import XMonad.Hooks.ManageHelpers (doCenterFloat)
 import XMonad.Hooks.ManageDocks
@@ -37,7 +39,11 @@ myLayoutHook =
     onWorkspace "9" simpleFloat $
     onWorkspace "8" (avoidStruts Full ||| tiled) $
     onWorkspace "7" (avoidStruts Full ||| tiled) $
-    avoidStruts $ spacingWithEdge 4 $ gaps [(U, 5), (R, 3), (D, 3), (L, 3)] $ tiled ||| Mirror tiled ||| Full
+    avoidStruts $ spacingWithEdge 4 $ gaps [(U, 5), (R, 3), (D, 3), (L, 3)] $
+            tiled
+        ||| mastered (1/100) (1/2) simpleTabbed
+        ||| Full
+        ||| Mirror tiled
     where
         tiled = Tall nmaster delta ratio
         nmaster = 1
@@ -104,6 +110,7 @@ main = xmonad
         -- The Games submap
         , ("M-a", visualSubmap def $ fromList
                 [ ((0, xK_r), subName "RPCS3" $ spawn "~/.local/bin/rpcs3-v0.0.33-17020-d51d5ce8_linux64.AppImage")
+                , ((0, xK_d), subName "Dolphin" $ spawn "dolphin-emu")
                 ]
         )
         , ("M-q", kill)
