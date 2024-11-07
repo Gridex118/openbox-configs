@@ -35,13 +35,27 @@ myManageHook = composeAll
     , stringProperty "WM_NAME" =? "Quit GIMP" --> doCenterFloat
     ]
 
+-- This is more or less a hack
+-- Couldn't remove the text, so had the fg color match the bg
+myTabConfig = def { decoHeight = 1 
+                  , activeBorderWidth = 0
+                  , inactiveBorderWidth = 0
+                  , urgentBorderWidth = 0
+                  , decoWidth = 1
+                  , activeColor = "#FFFFFF"
+                  , inactiveColor = "#AAAAAA"
+                  , urgentColor = "#AAAAAA"
+                  , activeTextColor = "#FFFFFF"
+                  , inactiveTextColor = "#AAAAAA"
+                  , urgentTextColor = "#FFFFFF"}
+
 myLayoutHook =
     onWorkspace "9" simpleFloat $
     onWorkspace "8" (avoidStruts Full ||| tiled) $
     onWorkspace "7" (avoidStruts Full ||| tiled) $
     avoidStruts $ spacingWithEdge 4 $ gaps [(U, 5), (R, 3), (D, 3), (L, 3)] $
             tiled
-        ||| mastered (1/100) (1/2) simpleTabbed
+        ||| mastered (1/100) (1/2) (tabbed shrinkText myTabConfig)
         ||| Full
         ||| Mirror tiled
     where
