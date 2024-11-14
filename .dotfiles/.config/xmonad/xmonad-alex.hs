@@ -91,6 +91,7 @@ myStartupHook = do
     spawnOnce "picom -b"
     spawnOnce "conky"
     spawnOnce "/usr/lib/notification-daemon-1.0/notification-daemon"
+    spawnOnce "emacs --daemon --with-x-toolkit=lucid"
 
 main :: IO ()
 main = xmonad
@@ -118,6 +119,7 @@ main = xmonad
                 , ((shiftMask, xK_z), subName "Zathura -- selector" $ spawn "~/.config/rofi/implements/fzathura.sh --menu")
                 , ((0, xK_w), subName "Wezterm" $ spawn "wezterm")
                 , ((0, xK_g), subName "Gimp" $ spawn "gimp")
+                , ((0, xK_e), subName "Emacs" $ spawn "emacs")
                 , ((0, xK_v), subName "Volume" $ spawn "pavucontrol")
                 , ((0, xK_p), subName "Private Window" $ spawn "firefox --private-window")
                 ])
