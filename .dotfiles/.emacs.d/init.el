@@ -1,9 +1,10 @@
+(setq make-backup-files nil)
+
 ;; Add Melpa to, uhh, ELPACA?
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 ;; Recentf Mode
-(require 'recentf)
 (recentf-mode 1)
 (global-set-key "\C-xf" 'recentf-open-files)
 
@@ -22,16 +23,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(blink-cursor-mode nil)
- '(global-display-line-numbers-mode t)
- '(inhibit-startup-screen t)
- '(tool-bar-mode nil))
+ '(custom-enabled-themes '(modus-vivendi))
+ '(package-selected-packages '(doom-modeline)))
+
+;; Line numbering
+(setq-default global-display-line-numbers-mode t)
+(setq-default display-line-numbers 'relative)
 
 ;; Doom Modeline
-;; (require 'doom-modeline)
-;; (doom-modeline-mode 1)
-;; (setq column-number-mode t)
-;; (put 'erase-buffer 'disabled nil)
+(require 'doom-modeline)
+(doom-modeline-mode 1)
+(setq column-number-mode t)
+(put 'erase-buffer 'disabled nil)
 
 ;; C mode options
 (setq c-default-style "stroustrup")
