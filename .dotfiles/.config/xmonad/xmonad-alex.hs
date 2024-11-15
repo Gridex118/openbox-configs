@@ -91,7 +91,6 @@ myStartupHook = do
     spawnOnce "picom -b"
     spawnOnce "conky"
     spawnOnce "/usr/lib/notification-daemon-1.0/notification-daemon"
-    spawnOnce "emacs --daemon --with-x-toolkit=lucid"
 
 main :: IO ()
 main = xmonad
