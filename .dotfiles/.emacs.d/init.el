@@ -24,7 +24,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(modus-vivendi))
- '(package-selected-packages '(doom-modeline)))
+ '(package-selected-packages '(lsp-mode doom-modeline)))
 
 ;; Line numbering
 (setq-default global-display-line-numbers-mode t)
@@ -37,7 +37,11 @@
 (put 'erase-buffer 'disabled nil)
 
 ;; C mode options
-(setq c-default-style "stroustrup")
+(add-hook 'c-mode-hook
+          (lambda()
+            (setq c-default-style "stroustrup")
+	    (lsp)))
+
 (put 'set-goal-column 'disabled nil)
 
 ;; Tree Sitter
