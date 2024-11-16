@@ -23,8 +23,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(modus-vivendi))
- '(package-selected-packages '(doom-modeline)))
+ '(custom-enabled-themes '(doom-moonlight))
+ '(custom-safe-themes
+   '("8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a" default))
+ '(evil-undo-system 'undo-fu)
+ '(package-selected-packages
+   '(undo-fu undo-tree evil vertico marginalia doom-themes doom-modeline lsp-mode)))
+
+;; UI, and stuff
+(evil-mode)
+(marginalia-mode)
+(vertico-mode)
 
 ;; Line numbering
 (setq-default global-display-line-numbers-mode t)
@@ -38,9 +47,13 @@
 
 ;; C mode options
 (setq c-default-style "stroustrup")
+(setq lsp-enable-on-type-formatting nil)
 (put 'set-goal-column 'disabled nil)
+(add-hook 'c-mode-hook
+          (lambda()
+            (lsp)))
 
 ;; Tree Sitter
 (setq treesit-language-source-alist
-      '((cpp "https://github.com/tree-sitter/tree-sitter-cpp")
-	(c "https://github.com/tree-sitter/tree-sitter-c")))
+      '((cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.22.0")
+	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.22.0")))
