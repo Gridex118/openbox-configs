@@ -27,11 +27,13 @@
  '(custom-safe-themes
    '("8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a" default))
  '(evil-undo-system 'undo-fu)
+ '(org-format-latex-options
+   '(:foreground default :background default :scale 2 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
+		 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(undo-fu undo-tree evil vertico marginalia doom-themes doom-modeline lsp-mode)))
+   '(auctex company corfu undo-fu undo-tree evil vertico marginalia doom-themes doom-modeline lsp-mode)))
 
 ;; UI, and stuff
-(evil-mode)
 (marginalia-mode)
 (vertico-mode)
 
@@ -45,13 +47,18 @@
 (setq column-number-mode t)
 (put 'erase-buffer 'disabled nil)
 
+;; Org Mode Settings
+(setq org-latex-create-formula-image-program 'dvipng)
+
 ;; C mode options
 (setq c-default-style "stroustrup")
 (setq lsp-enable-on-type-formatting nil)
 (put 'set-goal-column 'disabled nil)
 (add-hook 'c-mode-hook
           (lambda()
-            (lsp)))
+            (lsp)
+	    (company-mode)
+	    (corfu)))
 
 ;; Tree Sitter
 (setq treesit-language-source-alist
