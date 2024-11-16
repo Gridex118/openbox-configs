@@ -31,7 +31,7 @@
    '(:foreground default :background default :scale 2 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
 		 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(auctex company corfu undo-fu undo-tree evil vertico marginalia doom-themes doom-modeline lsp-mode)))
+   '(all-the-icons auctex company corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
 
 ;; UI, and stuff
 (marginalia-mode)
