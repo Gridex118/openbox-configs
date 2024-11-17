@@ -31,9 +31,10 @@
    '(:foreground default :background default :scale 2 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
 		 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(all-the-icons auctex company corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
+   '(tree-sitter-langs tree-sitter yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
 
 ;; UI, and stuff
+(require 'all-the-icons) ; Because, for some reason, these aren't auto loaded
 (marginalia-mode)
 (vertico-mode)
 
@@ -42,7 +43,6 @@
 (setq-default display-line-numbers 'relative)
 
 ;; Doom Modeline
-(require 'doom-modeline)
 (doom-modeline-mode 1)
 (setq column-number-mode t)
 (put 'erase-buffer 'disabled nil)
@@ -50,15 +50,23 @@
 ;; Org Mode Settings
 (setq org-latex-create-formula-image-program 'dvipng)
 
-;; C mode options
+;; Programming options
 (setq c-default-style "stroustrup")
 (setq lsp-enable-on-type-formatting nil)
 (put 'set-goal-column 'disabled nil)
+(add-hook 'prog-mode-hook
+	  (lambda()
+	    (tree-sitter-hl-mode 1)
+	    (yas-global-mode 1)
+	    (yas-reload-all)))
 (add-hook 'c-mode-hook
           (lambda()
             (lsp)
-	    (company-mode)
-	    (corfu)))
+	    (corfu-mode 1)))
+(add-hook 'c++-mode-hook
+	  (lambda()
+	    (lsp)
+	    (corfu-mode 1)))
 
 ;; Tree Sitter
 (setq treesit-language-source-alist
