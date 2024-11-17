@@ -31,7 +31,7 @@
    '(:foreground default :background default :scale 2 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
 		 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(tree-sitter-langs tree-sitter yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
+   '(yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
 
 ;; UI, and stuff
 (require 'all-the-icons) ; Because, for some reason, these aren't auto loaded
@@ -51,24 +51,26 @@
 (setq org-latex-create-formula-image-program 'dvipng)
 
 ;; Programming options
+(setq major-mode-remap-alist
+      '((c-mode . c-ts-mode)
+	(c++-mode . c++-ts-mode)))
 (setq c-default-style "stroustrup")
 (setq lsp-enable-on-type-formatting nil)
+(setq treesit-font-lock-level 4)
 (put 'set-goal-column 'disabled nil)
 (add-hook 'prog-mode-hook
 	  (lambda()
-	    (tree-sitter-hl-mode 1)
+	    (lsp)
 	    (yas-global-mode 1)
 	    (yas-reload-all)))
 (add-hook 'c-mode-hook
           (lambda()
-            (lsp)
 	    (corfu-mode 1)))
 (add-hook 'c++-mode-hook
 	  (lambda()
-	    (lsp)
 	    (corfu-mode 1)))
 
 ;; Tree Sitter
 (setq treesit-language-source-alist
-      '((cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.22.0")
-	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.22.0")))
+      '((cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.4")
+	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.22.7")))

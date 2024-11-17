@@ -5,6 +5,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+(windmove-default-keybindings)
 
 ;; Precompute activation actions to speed up startup.
 ;; This requires the use of ‘package-quickstart-refresh’ every time the
