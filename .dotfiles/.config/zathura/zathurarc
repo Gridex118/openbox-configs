@@ -10,7 +10,7 @@ set pages-per-row 1
 #stop at page boundries
 set scroll-page-aware "true"
 set scroll-full-overlap 0.01
-set scroll-step 100
+set scroll-step 60
 
 #zoom settings
 set zoom-min 10
@@ -50,9 +50,6 @@ set recolor-lightcolor "#000000" #00
 set recolor-darkcolor "#E0E0E0" #06
 set recolor-reverse-video "true"
 set recolor-keephue "true"
-
-
-set scroll-step 50
 
 # map status bar toggle
 unmap F
