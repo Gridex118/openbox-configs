@@ -12,5 +12,8 @@
 ;; activations need to be changed, such as when ‘package-load-list’ is modified.
 (setq pacakge-quickstart t)
 
-(setq gc-cons-threshold (* 64 1000 1000)) ; 50MB threshold
+(setq gc-cons-threshold (* 64 1000 1000)) ; 64MB threshold
 (setq read-process-output-max (* 1024 1024)) ; 1MB
+
+;; Because the entire page changing hurts *my* eyes
+(setq scroll-conservatively 101)
