@@ -15,7 +15,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.StatusBar
 
-import XMonad.Util.EZConfig (additionalKeysP, removeKeysP)
+import XMonad.Util.EZConfig (additionalKeysP, removeKeysP, additionalKeys)
 import XMonad.Util.SpawnOnce
 
 import XMonad.Actions.Submap (visualSubmap, subName)
@@ -109,6 +109,9 @@ main = xmonad
         [ "M-p"
         , "M-S-q"
         , "M-S-c"
+        ]
+        `additionalKeys`
+        [ ((shiftMask, xK_Shift_R), spawn "notify-send 'hello'")    -- Okay, this is stupid; keeping it for shits and giggles
         ]
         `additionalKeysP`
         [ ("M-S-d", spawn "~/.config/rofi/implements/launcher.sh")
