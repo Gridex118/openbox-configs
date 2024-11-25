@@ -33,17 +33,15 @@
    '(:foreground default :background default :scale 2 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
 		 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(emms vterm evil company highlight-defined org-bullets swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
+   '(pdf-tools vterm evil highlight-defined org-bullets swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
 
 ;; UI, and stuff
 (require 'all-the-icons) ; Because, for some reason, these aren't auto loaded
 (evil-mode t) ; All hail the vim keybinds
-(company-mode 1)
-(add-hook 'company-mode-hook
-	  (lambda ()
-	    (setq company-idle-delay 0)))
 (marginalia-mode)
 (vertico-mode)
+(global-corfu-mode)
+(setq corfu-auto t)
 
 ;; Line numbering
 (setq-default global-display-line-numbers-mode t)
@@ -67,10 +65,6 @@
 (setq major-mode-remap-alist
       '((c-mode . c-ts-mode)
 	(c++-mode . c++-ts-mode)))
-(add-hook 'vterm-mode-hook
-	  (lambda()
-	    (display-line-numbers-mode -1)
-	    (evil-local-mode -1)))
 (add-hook 'prog-mode-hook
 	  (lambda()
 	    (setq lsp-enable-on-type-formatting nil
@@ -109,20 +103,29 @@
 					       ("breaklines" "true")
 					       ("upquote" "true")
 					       ("autogobble" "true")
-					       ("showstringspaces" "false")))
+					       ("showstringspaces" "false")
+					       ("basicstyle" "\\ttfamily")))
 	    (org-bullets-mode 1)))
+
+;; Terminal Settings
+(add-hook 'vterm-mode-hook
+	  (lambda()
+	    (display-line-numbers-mode -1)
+	    (setq evil-default-state emacs)))
 
 ;; Eww Settings
 (add-hook 'eww-mode-hook
 	  (lambda()
 	    (display-line-numbers-mode -1)
-	    (evil-local-mode -1)))
+	    (setq evil-default-state emacs)))
 
 ;; PDF Settings
 (add-hook 'doc-view-mode-hook
 	  (lambda()
 	    (display-line-numbers-mode -1)
-	    (evil-local-mode -1)))
+	    (setq evil-default-state emacs)))
+
+;; TODO: Combine the 3 previous setting blocks, since they repeat the same thing
 
 ;; Disable some disabling
 (put 'set-goal-column 'disabled nil)
