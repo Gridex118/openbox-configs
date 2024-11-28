@@ -17,3 +17,6 @@
 
 ;; Because the entire page changing hurts *my* eyes
 (setq scroll-conservatively 101)
+
+;; Was missing vim a lot
+(setq echo-keystrokes .1)

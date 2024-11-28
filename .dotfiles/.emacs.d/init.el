@@ -24,16 +24,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(doom-moonlight))
+ '(custom-enabled-themes '(doom-city-lights))
  '(custom-safe-themes
-   '("a6920ee8b55c441ada9a19a44e9048be3bfb1338d06fc41bce3819ac22e4b5a1" "8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a" default))
+   '("7ec8fd456c0c117c99e3a3b16aaf09ed3fb91879f6601b1ea0eeaee9c6def5d9" default))
  '(evil-undo-system 'undo-fu)
  '(ispell-alternate-dictionary nil)
  '(org-format-latex-options
    '(:foreground default :background default :scale 2 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
 		 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(pdf-tools vterm evil highlight-defined org-bullets swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
+   '(magit projectile rainbow-delimiters pdf-tools vterm evil highlight-defined org-bullets swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
 
 ;; UI, and stuff
 (require 'all-the-icons) ; Because, for some reason, these aren't auto loaded
@@ -54,7 +54,8 @@
 ;; Tree Sitter
 (setq treesit-language-source-alist
       '((cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.4")
-	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.22.7")))
+	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.22.7")
+	(bash "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3")))
 
 ;; Elisp Mode Settings
 (add-hook 'emacs-lisp-mode-hook
@@ -67,6 +68,8 @@
 	(c++-mode . c++-ts-mode)))
 (add-hook 'prog-mode-hook
 	  (lambda()
+	    (projectile-mode)
+	    (rainbow-delimiters-mode)
 	    (setq lsp-enable-on-type-formatting nil
 		  treesit-font-lock-level 4
 		  c-ts-mode-indent-style 'k&r
@@ -93,9 +96,11 @@
 ;; Org Mode Settings
 (add-hook 'org-mode-hook
 	  (lambda()
+	    (display-line-numbers-mode -1)
 	    (org-babel-do-load-languages
 	     'org-babel-load-languages '((C . t)
-					 (emacs-lisp . t)))
+					 (emacs-lisp . t)
+					 (shell . t)))
 	    (setq org-latex-create-formula-image-program 'dvipng
 		  jit-lock-defer-time 0.2
 		  org-latex-src-block-backend 'listing
@@ -110,20 +115,17 @@
 ;; Terminal Settings
 (add-hook 'vterm-mode-hook
 	  (lambda()
-	    (display-line-numbers-mode -1)
-	    (setq evil-default-state emacs)))
+	    (display-line-numbers-mode -1)))
 
 ;; Eww Settings
 (add-hook 'eww-mode-hook
 	  (lambda()
-	    (display-line-numbers-mode -1)
-	    (setq evil-default-state emacs)))
+	    (display-line-numbers-mode -1)))
 
 ;; PDF Settings
 (add-hook 'doc-view-mode-hook
 	  (lambda()
-	    (display-line-numbers-mode -1)
-	    (setq evil-default-state emacs)))
+	    (display-line-numbers-mode -1)))
 
 ;; TODO: Combine the 3 previous setting blocks, since they repeat the same thing
 
