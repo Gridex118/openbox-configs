@@ -33,7 +33,7 @@
    '(:foreground default :background default :scale 2 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
 		 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(magit projectile rainbow-delimiters pdf-tools vterm evil highlight-defined org-bullets swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
+   '(org-fragtog olivetti magit projectile rainbow-delimiters pdf-tools vterm evil highlight-defined org-bullets swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
 
 ;; UI, and stuff
 (require 'all-the-icons) ; Because, for some reason, these aren't auto loaded
@@ -96,6 +96,8 @@
 ;; Org Mode Settings
 (add-hook 'org-mode-hook
 	  (lambda()
+	    (org-fragtog-mode)
+	    (olivetti-mode)
 	    (display-line-numbers-mode -1)
 	    (org-babel-do-load-languages
 	     'org-babel-load-languages '((C . t)
@@ -103,6 +105,9 @@
 					 (shell . t)))
 	    (setq org-latex-create-formula-image-program 'dvipng
 		  jit-lock-defer-time 0.2
+		  org-startup-indented t
+		  org-hide-emphasis-markers t
+		  org-startup-with-latex-preview t
 		  org-latex-src-block-backend 'listing
 		  org-latex-listings-options '(("numbers" "left")
 					       ("breaklines" "true")
@@ -111,6 +116,10 @@
 					       ("showstringspaces" "false")
 					       ("basicstyle" "\\ttfamily")))
 	    (org-bullets-mode 1)))
+
+(add-hook 'olivetti-mode-hook
+	  (lambda()
+	    (setq olivetti-body-width 140)))
 
 ;; Terminal Settings
 (add-hook 'vterm-mode-hook
