@@ -22,22 +22,35 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(doom-city-lights))
- '(custom-safe-themes
-   '("7ec8fd456c0c117c99e3a3b16aaf09ed3fb91879f6601b1ea0eeaee9c6def5d9" default))
  '(evil-undo-system 'undo-fu)
  '(ispell-alternate-dictionary nil)
  '(org-format-latex-options
    '(:foreground default :background default :scale 2 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
 		 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(lsp-ui lsp-haskell haskell-mode tmux-mode lua-mode evil-collection org-fragtog olivetti magit projectile rainbow-delimiters pdf-tools vterm evil highlight-defined org-bullets swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
+   '(org-bullets lsp-ui lsp-haskell haskell-mode tmux-mode lua-mode org-fragtog olivetti magit projectile rainbow-delimiters pdf-tools vterm highlight-defined swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
 
 ;; UI, and stuff
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-city-lights t)
+  (doom-themes-org-config))
+
 (require 'all-the-icons) ; Because, for some reason, these aren't auto loaded
-(setq evil-want-keybinding nil)
-(evil-mode t) ; All hail the vim keybinds
-(evil-collection-init)
+
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integratoin t
+	evil-want-keybinding nil)
+  :config(evil-mode 1))
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
 (marginalia-mode)
 (vertico-mode)
 (global-corfu-mode)
