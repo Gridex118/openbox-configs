@@ -1,5 +1,3 @@
-(setq make-backup-files nil)
-
 ;; Add Melpa to, uhh, ELPACA?
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -33,10 +31,11 @@
    '(:foreground default :background default :scale 2 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
 		 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(evil-collection org-fragtog olivetti magit projectile rainbow-delimiters pdf-tools vterm evil highlight-defined org-bullets swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
+   '(lsp-ui lsp-haskell haskell-mode tmux-mode lua-mode evil-collection org-fragtog olivetti magit projectile rainbow-delimiters pdf-tools vterm evil highlight-defined org-bullets swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
 
 ;; UI, and stuff
 (require 'all-the-icons) ; Because, for some reason, these aren't auto loaded
+(setq evil-want-keybinding nil)
 (evil-mode t) ; All hail the vim keybinds
 (evil-collection-init)
 (marginalia-mode)
@@ -56,7 +55,8 @@
 (setq treesit-language-source-alist
       '((cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.4")
 	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.22.7")
-	(bash "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3")))
+	(bash "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3")
+	(tmux "https://github.com/Freed-Wu/tree-sitter-tmux")))
 
 ;; Elisp Mode Settings
 (add-hook 'emacs-lisp-mode-hook
@@ -97,17 +97,13 @@
 ;; Org Mode Settings
 (add-hook 'org-mode-hook
 	  (lambda()
-	    (org-fragtog-mode)
+	    (setq-local electric-pair-inhibit-predicate
+			`(lambda (c)
+			   (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))
 	    (olivetti-mode)
-	    (display-line-numbers-mode -1)
-	    (org-babel-do-load-languages
-	     'org-babel-load-languages '((C . t)
-					 (emacs-lisp . t)
-					 (shell . t)))
 	    (setq org-latex-create-formula-image-program 'dvipng
 		  jit-lock-defer-time 0.2
 		  org-startup-indented t
-		  org-startup-folded 'show3levels
 		  org-startup-with-latex-preview t
 		  org-latex-src-block-backend 'listing
 		  org-latex-listings-options '(("numbers" "left")
@@ -116,8 +112,16 @@
 					       ("autogobble" "true")
 					       ("showstringspaces" "false")
 					       ("basicstyle" "\\ttfamily")))
-	    (org-bullets-mode 1)))
+	    (org-bullets-mode 1)
+	    (org-fragtog-mode)
+	    (display-line-numbers-mode -1)
+	    (org-babel-do-load-languages
+	     'org-babel-load-languages '((C . t)
+					 (emacs-lisp . t)
+					 (lua . t)
+					 (shell . t)))))
 
+(remove-hook 'olivetti-mode-hook 'visual-line-mode)
 (add-hook 'olivetti-mode-hook
 	  (lambda()
 	    (setq olivetti-body-width 140)))

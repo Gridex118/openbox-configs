@@ -37,6 +37,7 @@ myManageHook = composeAll
 
 -- This is more or less a hack
 -- Couldn't remove the text, so had the fg color match the bg
+myTabConfig :: Theme
 myTabConfig = def { decoHeight = 1 
                   , activeBorderWidth = 0
                   , inactiveBorderWidth = 0
