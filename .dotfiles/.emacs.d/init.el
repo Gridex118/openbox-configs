@@ -16,7 +16,6 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "JetBrains Mono" :foundry "JB" :slant normal :weight medium :height 143 :width normal))))
  '(isearch ((t (:inherit lazy-highlight :background "CadetBlue1" :slant normal :weight medium :height 143 :width normal :foundry "JB" :family "JetBrains Mono")))))
-(set-face-italic 'font-lock-comment-face t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -29,14 +28,12 @@
    '(:foreground default :background default :scale 2 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
 		 ("begin" "$1" "$" "$$" "\\(" "\\[")))
  '(package-selected-packages
-   '(ghci-completion flycheck highlight-quoted haskell-ts-mode org-bullets lsp-ui lsp-haskell haskell-mode tmux-mode lua-mode org-fragtog olivetti magit projectile rainbow-delimiters pdf-tools vterm highlight-defined swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
+   '(org-bullets lsp-ui lsp-haskell haskell-mode tmux-mode lua-mode org-fragtog olivetti magit projectile rainbow-delimiters pdf-tools vterm highlight-defined swiper yasnippet-snippets yasnippet all-the-icons auctex corfu undo-fu vertico marginalia doom-themes doom-modeline lsp-mode)))
 
 ;; UI, and stuff
 (use-package doom-themes
   :ensure t
   :config
-  (setq doom-themes-enable-bold   t
-	doom-themes-enable-italic t)
   (load-theme 'doom-city-lights t)
   (doom-themes-org-config))
 
@@ -72,7 +69,6 @@
       '((cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.4")
 	(c "https://github.com/tree-sitter/tree-sitter-c" "v0.22.7")
 	(bash "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3")
-	(haskell "https://github.com/tree-sitter/tree-sitter-haskell")
 	(tmux "https://github.com/Freed-Wu/tree-sitter-tmux")))
 
 ;; Elisp Mode Settings
