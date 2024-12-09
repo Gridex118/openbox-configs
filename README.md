@@ -1,6 +1,6 @@
 <h1 align="center">Dotfiles</h1>
 
-otfiles for my XMonad workflow.
+Dotfiles for my XMonad workflow.
 
 ## Dependencies
 * XMonad     :: The Window Manager
