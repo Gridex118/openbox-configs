@@ -1,6 +1,9 @@
 <h1 align="center">Dotfiles</h1>
 
-otfiles for my XMonad workflow.
+>[!WARNING]
+>These are older configs. Currently using [these](https://github.com/Gridex118/xmonad-alex) dots instead.
+
+Dotfiles for my XMonad workflow.
 
 ## Dependencies
 * XMonad     :: The Window Manager
